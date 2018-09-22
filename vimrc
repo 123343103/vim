@@ -1,10 +1,33 @@
-set nocompatible              " 去除VI一致性,必须
-filetype off                  " 必须
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General set
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number "show line number
+
+set tabstop=4 "set 1tab = 4space
+set shiftwidth=4 "set 1Backspace = 4space 与tabstop同步设置
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundel Plugin Manager
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible          
+filetype off             
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tomasr/molokai'
-call vundle#end()            " 必须
-filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
-" 设置
+Plugin 'scrooloose/nerdtree'
+call vundle#end()            
+filetype plugin indent on 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin set
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin 'tomasr/molokai'
 colorscheme molokai
+
+" Plugin 'scrooloose/nerdtree'
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
